@@ -35,6 +35,7 @@ export default {
   },
   data() {
     return {
+      // Amap: null,
       list: null,
       listLoading: true,
       map: null,
@@ -69,10 +70,14 @@ export default {
       this.listLoading = true
       getPoints()
         .then(response => {
+          // console.log(response)
           this.points = response.data.points
-          // console.log(this.points)
         })
         .then(() => {
+          // console.log('~~then~~')
+          // console.log('1. this.points = ')
+          // console.log(this.points)
+          // console.log('\\--- this.points ---/')
           this.initMap()
           this.listLoading = false
         })
@@ -91,7 +96,9 @@ export default {
         ] // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       })
         .then(AMap => {
+          // console.log('Amap')
           // console.log(AMap)
+          // this.Amap = AMap
           this.map = new AMap.Map('map-container')
 
           this.map.setZoom(11)
@@ -112,28 +119,41 @@ export default {
             this.placeSearch.setCity(e.poi.adcode)
             this.placeSearch.search(e.poi.name) // 关键字查询查询
           }) // 注册监听，当选中某条记录时会触发
+          // JSAPI 2.0 支持显示设置 zIndex, zIndex 越大约靠前，默认按顺序排列
+          const style = [
+            {
+              url: 'https://webapi.amap.com/images/mass/mass0.png',
+              anchor: new AMap.Pixel(6, 6),
+              size: new AMap.Size(11, 11),
+              zIndex: 3
+            },
+            {
+              url: 'https://webapi.amap.com/images/mass/mass1.png',
+              anchor: new AMap.Pixel(4, 4),
+              size: new AMap.Size(7, 7),
+              zIndex: 2
+            },
+            {
+              url: 'https://webapi.amap.com/images/mass/mass2.png',
+              anchor: new AMap.Pixel(3, 3),
+              size: new AMap.Size(5, 5),
+              zIndex: 1
+            }
+          ]
+          // 创建 MassMarkers 层及其标注
 
-          const styleObject = {
-            url: 'https://vdata.amap.com/icons/b18/1/2.png', // 图标地址
-            size: new AMap.Size(11, 11), // 图标大小
-            anchor: new AMap.Pixel(5, 5) // 图标显示位置偏移量，基准点为图标左上角
-          }
-
-          this.massMarks = new AMap.MassMarks({
-            zIndex: 5, // 海量点图层叠加的顺序
-            zooms: [3, 19], // 在指定地图缩放级别范围内展示海量点图层
-            style: styleObject // 设置样式对象
-          })
-
+          // 创建 MassMarks 实例
+          // console.log('2. this.points = ')
           // console.log(this.points)
-          console.log('massMarks start')
-          console.log('this.points = ')
-          console.log(this.points)
-          console.log('massMarks = ')
-          this.massMarks.setData(this.points)
-          console.log(this.massMarks)
-          console.log('massMarks finished')
-          this.massMarks.setMap(this.map)
+          // console.log('\\--- this.points ---/')
+          var massMarks = new AMap.MassMarks(this.points, {
+            opacity: 1,
+            zIndex: 111,
+            cursor: 'pointer',
+            style: style
+          })
+          // 将海量点实例添加到地图上
+          massMarks.setMap(this.map)
         })
         .catch(e => {
           console.error(e)
