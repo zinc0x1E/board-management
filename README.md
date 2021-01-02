@@ -1,90 +1,70 @@
-# vue-admin-template
+# Matx React Material Design Admin Dashboard Template
 
-English | [简体中文](./README-zh.md)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-> A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
+## Available Scripts
 
-**Live demo:** http://panjiachen.github.io/vue-admin-template
+In the project directory, you can run:
 
+### `npm start`
 
-**The current version is `v4.0+` build on `vue-cli`. If you want to use the old version , you can switch branch to [tag/3.11.0](https://github.com/PanJiaChen/vue-admin-template/tree/tag/3.11.0), it does not rely on `vue-cli`**
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Build Setup
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-```bash
-# clone the project
-git clone https://github.com/PanJiaChen/vue-admin-template.git
+### `npm test`
 
-# enter the project directory
-cd vue-admin-template
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-# install dependency
-npm install
+### `npm run build`
 
-# develop
-npm run dev
-```
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-This will automatically open http://localhost:9528
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-## Build
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```bash
-# build for test environment
-npm run build:stage
+### `npm run eject`
 
-# build for production environment
-npm run build:prod
-```
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-## Advanced
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```bash
-# preview the release environment effect
-npm run preview
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-# preview the release environment effect + static resource analysis
-npm run preview -- --report
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-# code format check
-npm run lint
+## Learn More
 
-# code format check and auto fix
-npm run lint -- --fix
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Refer to [Documentation](https://panjiachen.github.io/vue-element-admin-site/guide/essentials/deploy.html) for more information
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Demo
+### Code Splitting
 
-![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-## Extra
+### Analyzing the Bundle Size
 
-If you want router permission && generate menu by user roles , you can use this branch [permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-For `typescript` version, you can use [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template) (Credits: [@Armour](https://github.com/Armour))
+### Making a Progressive Web App
 
-## Related Project
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
+### Advanced Configuration
 
-- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-- [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
+### Deployment
 
-- [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-## Browsers support
+### `npm run build` fails to minify
 
-Modern browsers and Internet Explorer 10+.
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --------- | --------- | --------- | --------- |
-| IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions
-
-## License
-
-[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
-
-Copyright (c) 2017-present PanJiaChen
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
