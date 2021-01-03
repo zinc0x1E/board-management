@@ -155,6 +155,12 @@ const _nav =  [
     icon: 'cil-chart-pie'
   },
   {
+    _tag: 'CSidebarNavItem',
+    name: 'AMap',
+    to: '/amap',
+    icon: 'cil-map'
+  },
+  {
     _tag: 'CSidebarNavDropdown',
     name: 'Icons',
     route: '/icons',
