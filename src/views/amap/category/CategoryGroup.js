@@ -35,7 +35,7 @@ const CategoryDropdownGroup = ({ refers, onLocalConditionKeyChange }) => {
   };
 
   return (
-    <CCard style={{ width: "-webkit-fill-available" }}>
+    <div style={{ width: "-webkit-fill-available" }}>
       <CCardBody>
         <CInputGroup>
           <CategoryDropdown
@@ -52,7 +52,7 @@ const CategoryDropdownGroup = ({ refers, onLocalConditionKeyChange }) => {
           ></CategoryDropdown>
         </CInputGroup>
       </CCardBody>
-    </CCard>
+    </div>
   );
 };
 

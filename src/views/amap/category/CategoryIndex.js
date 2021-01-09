@@ -26,6 +26,14 @@ const CategoryIndex = ({ onConditionKeyChange }) => {
       <CCardBody>
         <CRow>
           <CCol>
+            广告介质类别
+          </CCol>
+          <CCol>
+            广告产品类别
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol>
             <CategoryGroup
               refers={category.media}
               onLocalConditionKeyChange={onLocalConditionKeyChange("refer")}
