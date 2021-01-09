@@ -20,21 +20,48 @@ export function makeServer({ environment = "test" } = {}) {
 
     factories: {
       point: Factory.extend({
-        lnglat() {
-          let lnglat = [getRandomArbitrary(121.1515, 121.7667), getRandomArbitrary(30.8, 31.5)];
-          return lnglat;
+        code() {
+          return 200;
         },
-        name() {
-          return faker.address.streetAddress();
+        msg() {
+          return "success";
         },
-        style() {
-          return getRandomInteger(0, 3);
-        }
+        advId() {
+          return "" + getRandomInteger(1000, 100000)
+        },
+        latitude() {
+          return getRandomArbitrary(30.8, 31.5);
+        },
+        longtitude() {
+          return getRandomArbitrary(121.1515, 121.7667);
+        },
+        // lnglat() {
+        //   let lnglat = [getRandomArbitrary(121.1515, 121.7667), getRandomArbitrary(30.8, 31.5)];
+        //   return lnglat;
+        // },
+        // style() {
+        //   return getRandomInteger(0, 3);
+        // },
+        advertisement() {
+          return {
+            advId: this.advId,
+            name: faker.address.streetAddress(),
+            theme: faker.address.streetAddress(),
+            master: faker.address.streetAddress(),
+            price: getRandomInteger(10000, 100000),
+            date: faker.date.past(),
+            img: faker.image.image(),
+            location: faker.address.streetAddress(),
+            latitude: this.latitude,
+            longtitude: this.longtitude,
+            conditionkey: faker.random.uuid(),
+          }
+        },
       })
     },
     
     seeds(server) {
-      server.createList('point', 300000)
+      server.createList('point', 3000)
     },
     
     routes() {
@@ -42,6 +69,17 @@ export function makeServer({ environment = "test" } = {}) {
 
       this.get("/points", (schema) => {
         return schema.points.all();
+      });
+
+      this.get("/queryForAdvId", (schema, request) => {
+        // console.log(request.queryParams)
+        // console.log("request = ")
+        // console.log(request.queryParams)
+        return schema.db.points;
+      });
+
+      this.get("/queryForAdv", (schema, request) => {
+        return schema.db.points.findBy({advId: request.queryParams.advId});
       });
 
       this.passthrough();
