@@ -1,89 +1,12 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import { CChartLine } from "@coreui/react-chartjs";
-import { getStyle, hexToRgba } from "@coreui/utils";
 import AMapLoader from "@amap/amap-jsapi-loader";
-import axios from "axios";
-
-const brandSuccess = getStyle("success") || "#4dbd74";
-const brandInfo = getStyle("info") || "#20a8d8";
-const brandDanger = getStyle("danger") || "#f86c6b";
-
 class AMap extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.state = {
-  //   //   points: null,
-  //   // };
-
-  //   // this.fetchPointsAbstract = this.fetchPointsAbstract.bind(this);
-  // }
-
   componentDidUpdate() {
     this.initMap(this.props.points);
   }
-  // componentDidMount() {
-  //   // axios.get('https://528b344a-cd47-4ea0-92ee-01281b90c46c.mock.pstmn.io/songs')
-  //   this.fetchPointsAbstract()
-  //     .then((response) => {
-  //       // this.setState({ points: this.processPoints(response.data) });
-  //       let points = this.processPoints(response.data);
-  //       console.log(points);
-  //       this.initMap(points);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
-
-  // fetchPointsAbstract() {
-  //   return axios.get("/api/queryForAdvId", {
-  //     params: {
-  //       maxLat: 31.5,
-  //       minLat: 30.8,
-  //       maxLng: 121.7667,
-  //       minLng: 121.1515,
-  //       precise: 20,
-  //       conditionKey: this.props.condi,
-  //     },
-  //   });
-  // }
-
-  // processPoints(points) {
-  //   for (let point of points) {
-  //     point.lnglat = [point.longtitude, point.latitude];
-  //     point.longtitude = null;
-  //     point.latitude = null;
-  //     point.style = 1;
-  //   }
-  //   return points;
-  // }
-
-  // fetechPoint(advId) {
-  //   return axios.get("/api/queryForAdv", {
-  //     params: {
-  //       advId: advId,
-  //     },
-  //   });
-  // }
-
-  // fetechPoints(points) {
-  //   console.log("fetchPoints() -- param -- points = ");
-  //   console.log(points);
-  //   for (let item of points) {
-  //     this.fetechPoint(item.advId).then((responce) => {
-  //       item.advertisement = responce.data.advertisement;
-  //     });
-  //   }
-
-  //   console.log("fetchPoints() -- return -- points = ");
-  //   console.log(points);
-  //   return points;
-  // }
 
   renderClusterMarker = (points, AMap) => (context) => {
-    console.log(points);
-    console.log(points.length);
     var factor = Math.pow(context.count / points.length, 1 / 18);
     var div = document.createElement("div");
     var Hue = 180 - factor * 180;
@@ -140,27 +63,6 @@ class AMap extends React.Component {
           placeSearch.search(e.poi.name); // 关键字查询查询
         }); // 注册监听，当选中某条记录时会触发
         // JSAPI 2.0 支持显示设置 zIndex, zIndex 越大约靠前，默认按顺序排列
-        const style = [
-          {
-            url: "https://webapi.amap.com/images/mass/mass0.png",
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(11, 11),
-            zIndex: 3,
-          },
-          {
-            url: "https://webapi.amap.com/images/mass/mass1.png",
-            anchor: new AMap.Pixel(4, 4),
-            size: new AMap.Size(7, 7),
-            zIndex: 2,
-          },
-          {
-            url: "https://webapi.amap.com/images/mass/mass2.png",
-            anchor: new AMap.Pixel(3, 3),
-            size: new AMap.Size(5, 5),
-            zIndex: 1,
-          },
-        ];
-
         let cluster = new AMap.MarkerCluster(map, points, {
           gridSize: 60, // 设置网格像素大小
           renderClusterMarker: this.renderClusterMarker(points, AMap), // 自定义聚合点样式
@@ -173,10 +75,8 @@ class AMap extends React.Component {
           }, // 自定义非聚合点样式
         });
 
-        // let marker = new AMap.Marker();
         let infoWindow = new AMap.InfoWindow();
         cluster.on("click", (e) => {
-          // console.log(e);
           infoWindow.setPosition(e.marker._position);
           infoWindow.setContent(this.renderInfoWindow(e.clusterData));
           infoWindow.setMap(map);
@@ -216,7 +116,8 @@ class AMap extends React.Component {
     };
 
     let result = "";
-    let data = this.fetechPoints(srcData);
+    let data = this.props.fetechPoints(srcData);
+    console.log(data);
 
     if (data.length > 1) {
       result = data.map((item, index) => (
@@ -226,10 +127,6 @@ class AMap extends React.Component {
         </div>
       ));
     } else {
-      // console.log("data[0] = ");
-      // console.log(data[0]);
-      // console.log("data[0].advertisement = ");
-      // console.log(data[0].advertisement);
       result = (
         <>
           <img src={data[0].advertisement.img} alt=""></img>
@@ -248,7 +145,6 @@ class AMap extends React.Component {
     }
 
     result = ReactDOMServer.renderToStaticMarkup(result);
-    console.log(result);
     return result;
   }
 

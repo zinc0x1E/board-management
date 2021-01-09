@@ -1,38 +1,5 @@
 import React, { useState } from "react";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardFooter,
-  CCardHeader,
-  CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
-  CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
-  CLabel,
-  CSelect,
-  CRow,
-  CSwitch,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { DocsLink } from "src/reusable";
+import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 import category from "./CategoryConfig";
 import CategoryGroup from "./CategoryGroup";
@@ -42,9 +9,7 @@ const CategoryIndex = ({ onConditionKeyChange }) => {
     "0000000000000000"
   );
 
-  const [proConditionKey, setProConditionKey] = useState(
-    "0000000000000000"
-  );
+  const [proConditionKey, setProConditionKey] = useState("0000000000000000");
 
   const onLocalConditionKeyChange = (prop) => (conditionKey) => {
     if (prop === "refer") {
@@ -58,19 +23,6 @@ const CategoryIndex = ({ onConditionKeyChange }) => {
 
   return (
     <CCard>
-      {/* <CDropdown className="mt-2">
-        <CDropdownToggle caret color="info">
-          Dropdown button
-        </CDropdownToggle>
-        <CDropdownMenu>
-          <CDropdownItem header>Header</CDropdownItem>
-          <CDropdownItem disabled>Action Disabled</CDropdownItem>
-          <CDropdownItem>Action</CDropdownItem>
-          <CDropdownItem divider />
-          <CDropdownItem>Another Action</CDropdownItem>
-        </CDropdownMenu>
-      </CDropdown> */}
-      {/* {console.log(category)} */}
       <CCardBody>
         <CRow>
           <CCol>

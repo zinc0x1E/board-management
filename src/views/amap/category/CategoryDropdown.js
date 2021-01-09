@@ -1,40 +1,6 @@
-import React, { lazy, useState, useEffect } from "react";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardFooter,
-  CCardHeader,
-  CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
-  CForm,
-  CFormGroup,
-  CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
-  CTextarea,
-  CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
-  CLabel,
-  CSelect,
-  CRow,
-  CSwitch,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { DocsLink } from "src/reusable";
+import React, { useState } from "react";
+import { CDropdownMenu, CDropdownToggle, CDropdown } from "@coreui/react";
 
-import category from "./CategoryConfig";
 import CategoryDropdownItem from "./CategoryDropdownItem";
 
 /*
@@ -55,7 +21,6 @@ list: [{
 */
 const CategoryDropdown = ({ list, onSelectedItemChange, color }) => {
   const [subCategorySelected, setSubCategorySelected] = useState(list[0]);
-
 
   const onItemClick = (color) => (category) => () => {
     setSubCategorySelected(category);
