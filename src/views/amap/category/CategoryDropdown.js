@@ -25,9 +25,6 @@ const CategoryDropdown = ({ list, onSelectedItemChange, color }) => {
   const onItemClick = (color) => (category) => () => {
     setSubCategorySelected(category);
     onSelectedItemChange(category, color);
-    // console.log("IN CategoryDropdown");
-    // console.log(color);
-    // console.log(category);
   };
 
   return (
@@ -36,9 +33,6 @@ const CategoryDropdown = ({ list, onSelectedItemChange, color }) => {
         {subCategorySelected.name}
       </CDropdownToggle>
       <CDropdownMenu>
-        {/* {console.log(refer.subCategory)} */}
-        {/* {console.log("list")}
-        {console.log(list)} */}
         {list.map((item, index) => (
           <CategoryDropdownItem
             category={item}

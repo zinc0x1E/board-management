@@ -78,10 +78,21 @@ class AMap extends React.Component {
         let infoWindow = new AMap.InfoWindow();
         cluster.on("click", (e) => {
           infoWindow.setPosition(e.marker._position);
-          infoWindow.setContent(this.renderInfoWindow(e.clusterData));
-          infoWindow.setMap(map);
 
-          infoWindow.open();
+          let promises = this.props.fetechPoints(e.clusterData);
+          Promise.all(promises).then((reponses) => {
+            let pointsInInfowindow = [];
+            reponses.forEach((response) => {
+              pointsInInfowindow.push(response.data);
+            });
+
+            this.renderInfoWindow(pointsInInfowindow).then((result) => {
+              infoWindow.setContent(result);
+              infoWindow.setMap(map);
+
+              infoWindow.open();
+            })
+          });
         });
 
         map.on("zoomchange", (e) => {
@@ -93,7 +104,7 @@ class AMap extends React.Component {
       });
   }
 
-  renderInfoWindow(srcData) {
+  async renderInfoWindow(data) {
     const styles = {
       amapInfoWindow: {
         position: "relative",
@@ -116,13 +127,11 @@ class AMap extends React.Component {
     };
 
     let result = "";
-    let data = this.props.fetechPoints(srcData);
-    console.log(data);
 
     if (data.length > 1) {
       result = data.map((item, index) => (
         <div style={styles.amapInfoWindow} key={item.advertisement.advId}>
-          ${item.advertisement.name}
+          {item.advertisement.name}
           <div style={styles.amapInfoSharp}></div>
         </div>
       ));
@@ -144,8 +153,7 @@ class AMap extends React.Component {
       );
     }
 
-    result = ReactDOMServer.renderToStaticMarkup(result);
-    return result;
+    return ReactDOMServer.renderToStaticMarkup(result);
   }
 
   // render

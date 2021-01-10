@@ -48,6 +48,7 @@ class AMapIndex extends React.Component {
   componentDidMount() {
     this.fetchPointsAbstract("00000000000000000000000000000000")
       .then((response) => {
+
         this.setState({ points: this.processPoints(response.data) });
       })
       .catch((error) => {
@@ -60,10 +61,8 @@ class AMapIndex extends React.Component {
 
     this.fetchPointsAbstract(conditionKey)
       .then((response) => {
-        // this.setState({ points: this.processPoints(response.data) });
         this.setState({ points: this.processPoints(response.data) });
-        // console.log(points);
-        // this.initMap(points);
+
       })
       .catch((error) => {
         console.error(error);
@@ -85,33 +84,29 @@ class AMapIndex extends React.Component {
 
   processPoints(points) {
     for (let point of points) {
-      point.lnglat = [point.longtitude, point.latitude];
-      point.longtitude = null;
+      point.lnglat = [point.longitude, point.latitude];
+      point.longitude = null;
       point.latitude = null;
       point.style = 1;
     }
     return points;
   }
 
-  fetechPoints(points) {
-    console.log("fetchPoints() -- param -- points = ");
-    console.log(points);
+  // _fetechPoints = (points) => async (resolve, reject) => {
+  fetechPoints = (points) => {
+    let promises = [];
     for (let item of points) {
-      axios
-        .get("/api/queryForAdv", {
+      promises.push(
+        axios.get("/api/queryForAdv", {
           params: {
             advId: item.advId,
           },
         })
-        .then((responce) => {
-          item.advertisement = responce.data.advertisement;
-        });
+      );
     }
+    return promises;
+  };
 
-    console.log("fetchPoints() -- return -- points = ");
-    console.log(points);
-    return points;
-  }
 
   render() {
     return (

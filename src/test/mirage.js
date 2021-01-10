@@ -1,5 +1,5 @@
-import { createServer, Model, Factory } from "miragejs"
-import faker from "faker"
+import { createServer, Model, Factory } from "miragejs";
+import faker from "faker";
 
 faker.locale = "zh_CN";
 
@@ -12,7 +12,7 @@ function getRandomInteger(min, max) {
 }
 
 export function makeServer({ environment = "test" } = {}) {
-  console.log("start make server")
+  console.log("start make server");
   let server = createServer({
     models: {
       point: Model,
@@ -27,12 +27,12 @@ export function makeServer({ environment = "test" } = {}) {
           return "success";
         },
         advId() {
-          return "" + getRandomInteger(1000, 100000)
+          return "" + getRandomInteger(1000, 100000);
         },
         latitude() {
           return getRandomArbitrary(30.8, 31.5);
         },
-        longtitude() {
+        longitude() {
           return getRandomArbitrary(121.1515, 121.7667);
         },
         // lnglat() {
@@ -53,17 +53,17 @@ export function makeServer({ environment = "test" } = {}) {
             img: faker.image.image(),
             location: faker.address.streetAddress(),
             latitude: this.latitude,
-            longtitude: this.longtitude,
+            longitude: this.longitude,
             conditionkey: faker.random.uuid(),
-          }
+          };
         },
-      })
+      }),
     },
-    
+
     seeds(server) {
-      server.createList('point', 3000)
+      server.createList("point", 5000);
     },
-    
+
     routes() {
       this.namespace = "api";
 
@@ -75,19 +75,37 @@ export function makeServer({ environment = "test" } = {}) {
         // console.log(request.queryParams)
         // console.log("request = ")
         // console.log(request.queryParams)
-        return schema.db.points;
+        let points = [];
+        schema.db.points.forEach((item) => {
+          points.push({
+            code: item.code,
+            msg: item.msg,
+            advId: item.advId,
+            latitude: item.latitude,
+            longitude: item.longitude,
+          });
+        });
+        return points;
       });
 
       this.get("/queryForAdv", (schema, request) => {
-        return schema.db.points.findBy({advId: request.queryParams.advId});
+        return {
+          code: "200",
+          msg: "success",
+          advertisement: schema.db.points.findBy({
+            advId: request.queryParams.advId,
+          }).advertisement,
+        };
       });
 
       this.passthrough();
       this.passthrough("https://vdata.amap.com/**");
-      this.passthrough("https://528b344a-cd47-4ea0-92ee-01281b90c46c.mock.pstmn.io/**")
-    }
+      this.passthrough(
+        "https://528b344a-cd47-4ea0-92ee-01281b90c46c.mock.pstmn.io/**"
+      );
+    },
   });
-  
-  console.log("return server")
+
+  console.log("return server");
   return server;
 }

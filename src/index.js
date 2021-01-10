@@ -14,7 +14,7 @@ import store from './store'
 
 import { makeServer } from './test/mirage'
 
-// makeServer({ environment: "development" })
+makeServer({ environment: "development" })
 
 React.icons = icons
 
