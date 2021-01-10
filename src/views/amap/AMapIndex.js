@@ -1,16 +1,10 @@
 import React from "react";
 import {
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
-  CCol,
-  CProgress,
   CRow,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
 
 import AMap from "./AMap";
 import CategoryIndex from "./category/CategoryIndex";

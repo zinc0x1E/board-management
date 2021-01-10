@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CCard, CCardBody, CInputGroup } from "@coreui/react";
+import { CCardBody, CInputGroup } from "@coreui/react";
 
 import CategoryDropdown from "./CategoryDropdown";
 

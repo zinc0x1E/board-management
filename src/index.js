@@ -12,9 +12,9 @@ import { icons } from './assets/icons'
 import { Provider } from 'react-redux'
 import store from './store'
 
-import { makeServer } from './test/mirage'
+// import { makeServer } from './test/mirage'
 
-makeServer({ environment: "development" })
+// makeServer({ environment: "development" })
 
 React.icons = icons
 
